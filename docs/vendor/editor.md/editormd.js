@@ -4231,7 +4231,7 @@
      */
     
     editormd.loadKaTeX = function (callback) {
-        var loadPath = window.editormd_config.editor_modules_url;
+        var loadPath = '/vendor/editor.md/lib/';
         editormd.loadCSS(loadPath + "../../katex/katex.min", function(){
             editormd.loadScript(loadPath + "../../katex/katex.min", callback || function(){});
         });
