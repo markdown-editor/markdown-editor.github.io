@@ -23,111 +23,210 @@
         body {
             padding: 0;
             margin: 0;
+            background-color: #4f5e6d;
         }
         .editor-wrapper {
+            width: 100%;
+            height: 100%;
+            max-height: 100%;
             width: calc(100% - 2px);
-            height: calc(100% - 2px);
+            height: calc(100% - 62px);
+        }
+
+        .examples {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            bottom: 0;
+            background: #f1f1f1;
+            text-align: center;
+            padding-top: 0;
+            height: 100%;
+            opacity: 0;
+            color: #333333;
+            -webkit-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+            display: block;
+            -webkit-overflow-scrolling: touch;
+            max-height: 100%;
+            visibility: hidden;
+        }
+
+        .examples.active {
+            opacity: 1;
+            top: 0;
+            left: 0;
+            visibility: visible;
+            z-index: 9999;
+        }
+
+        .page-close {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 999;
+            color: #aaaaaa;
+            font-size: 2em;
+            cursor: pointer;
+            height: 50px;
+            width: 50px;
+            box-sizing: border-box;
+            line-height: 50px;
+            display: inline-block;
+        }
+        .site-nav {
+            background-color: #4f5e6d;
+            height: 60px;
+            line-height: 60px;
+            padding: 0 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.428571429;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+
+        .btn.btn-default {
+            color: #333;
+            background-color: #fff;
+            border-color: #ccc;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
+<div class="site-nav">
+    <a href="javascript:void(0);" class="btn btn-default" onclick="showFloatPage('example');">Markdown Tutorial</a>
+</div>
 <div class="editor-wrapper">
     <div id="wp-content-editor-container"></div>
 </div>
-
+<div id="example" class="examples">
+    <a href="#" class="page-close" data-page="example"><i class="fa fa-times" aria-hidden="true"></i></a>
+    <div class="examples-wrapper">
+        <h1>Markdown Editor</h1>
+    </div>
+</div>
 
 <script>
-var global_editormd_config = {};
-var wp_editor_container = '#wp-content-editor-container';
-var wp_editor = 'wp-content-editor-container';
-var githuber_md_editor;
-  
-(function($) {
-    $(function() {
 
-        global_editormd_config = {
-            width: '100%',
-            height: 'calc(100vh - 40px)',
-            path: '/vendor/editor.md/lib/',
-            placeholder: '',
-            syncScrolling: true,
-            watch: true,        
-            htmlDecode: true,
-            theme: 'default', 
-            previewTheme: 'default',
-            editorTheme: 'default',   
-            tex: true,
-            flowChart: true,  
-            sequenceDiagram: true, 
-            taskList: true,
-            mermaid: true,
-            lineNumbers: true,
-            previewCodeLineNumber: true,
-            toolbarAutoFixed: true, 
-            tocm: false, 
-            tocDropdown: false,    
-            atLink: false,
-            //imagePasteCallback: config.image_paste_callback,
-            toolbarIcons: function () {
-                return [
-                    'undo', 'redo', '|',
-                    'bold', 'del', 'italic', 'quote', '|',
-                    'h1', 'h2', 'h3', 'h4', '|',
-                    'list-ul', 'list-ol', 'hr', '|',
-                    'link', 'reference-link', 'image', 'code', 'code-block', 'table', 'datetime', 'html-entities', 'more', 'pagebreak', '|',
-                    'watch', 'preview', 'fullscreen'
-                ];
-            },
-            onfullscreen: function () {
-                $(wp_editor_container).css({
-                    'position': 'fixed',
-                    'z-index': '99999'
-                })
-            },
+    var global_editormd_config = {};
+    var wp_editor_container = '#wp-content-editor-container';
+    var wp_editor = 'wp-content-editor-container';
+    var githuber_md_editor;
 
-            onfullscreenExit: function () {
-                $(wp_editor_container).css({
-                    'position': 'relative',
-                    'z-index': 'auto'
-                });
-            },
+    function showFloatPage(page) {
+        $('#' + page).addClass('active');
+    }
+    
+    (function($) {
+        $(function() {
 
-            toolbarIconsClass: {
-                toc: 'fa-list-alt',
-                more: 'fa-ellipsis-h'
-            },
+            $('.page-close').click(function() {
+                var page = $(this).attr('data-page');
+                console.log(page);
+                $('#' + page).removeClass('active');
+            });
 
-            toolbarHandlers: {
-                toc: function (cm, icon, cursor, selection) {
-                    cm.replaceSelection('[toc]');
+            global_editormd_config = {
+                width: '100%',
+                height: 'calc(100vh - 100px)',
+                path: '/vendor/editor.md/lib/',
+                placeholder: '',
+                syncScrolling: true,
+                watch: true,        
+                htmlDecode: true,
+                theme: 'default', 
+                previewTheme: 'default',
+                editorTheme: 'default',   
+                tex: true,
+                flowChart: true,  
+                sequenceDiagram: true, 
+                taskList: true,
+                mermaid: true,
+                lineNumbers: true,
+                previewCodeLineNumber: true,
+                toolbarAutoFixed: true, 
+                tocm: false, 
+                tocDropdown: false,    
+                atLink: false,
+                //imagePasteCallback: config.image_paste_callback,
+                toolbarIcons: function () {
+                    return [
+                        'undo', 'redo', '|',
+                        'bold', 'del', 'italic', 'quote', '|',
+                        'h1', 'h2', 'h3', 'h4', '|',
+                        'list-ul', 'list-ol', 'hr', '|',
+                        'link', 'reference-link', 'image', 'code', 'code-block', 'table', 'datetime', 'html-entities', 'more', 'pagebreak', '|',
+                        'watch', 'preview', 'fullscreen'
+                    ];
                 },
-                more: function (cm, icon, cursor, selection) {
-                    cm.replaceSelection('\r\n<!--more-->\r\n');
-                }
-            },
-            lang: {
-                toolbar: {
-                    toc: 'The Table Of Contents',
-                    more: 'More'
-                }
-            },
-            onload : function() {
-                var keyMap = {
-                    "Ctrl-T": function(cm) {
-                        alert("Ctrl+T");
+                onfullscreen: function () {
+                    $(wp_editor_container).css({
+                        'position': 'fixed',
+                        'z-index': '99999'
+                    })
+                },
+
+                onfullscreenExit: function () {
+                    $(wp_editor_container).css({
+                        'position': 'relative',
+                        'z-index': 'auto'
+                    });
+                },
+
+                toolbarIconsClass: {
+                    toc: 'fa-list-alt',
+                    more: 'fa-ellipsis-h'
+                },
+
+                toolbarHandlers: {
+                    toc: function (cm, icon, cursor, selection) {
+                        cm.replaceSelection('[toc]');
                     },
-            
-                };
-                this.addKeyMap(keyMap);
+                    more: function (cm, icon, cursor, selection) {
+                        cm.replaceSelection('\r\n<!--more-->\r\n');
+                    }
+                },
+                lang: {
+                    toolbar: {
+                        toc: 'The Table Of Contents',
+                        more: 'More'
+                    }
+                },
+                onload : function() {
+                    var keyMap = {
+                        "Ctrl-T": function(cm) {
+                            alert("Ctrl+T");
+                        },
+                
+                    };
+                    this.addKeyMap(keyMap);
+                }
+            };
+
+            if ($(wp_editor_container).length == 1) {
+                githuber_md_editor = editormd(wp_editor, global_editormd_config);
             }
-        };
+        });
 
-        if ($(wp_editor_container).length == 1) {
-            githuber_md_editor = editormd(wp_editor, global_editormd_config);
-        }
-    });
+    })(jQuery);
 
-})(jQuery);
 </script>
 </body>
 </html>
