@@ -9,6 +9,7 @@
     <script src="/vendor/editor.md/editormd.js"></script>
     <script src="/vendor/editor.md/languages/en.js"></script>
     <link rel="stylesheet" href="/vendor/editor.md/css/editormd.min.css?ver=1.5.0.5" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Markdown Editor - Learn Markdown Online</title>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135081047-3"></script>
@@ -108,6 +109,15 @@
             text-decoration: none;
             margin-right: 5px;
         }
+
+        .table {
+            background-color: #ffffff;
+        }
+
+        .examples-wrapper {
+            text-align: left;
+        }
+    
     </style>
 </head>
 <body>
@@ -122,7 +132,53 @@
 <div id="example" class="examples">
     <a href="#" class="page-close" data-page="example"><i class="fa fa-times" aria-hidden="true"></i></a>
     <div class="examples-wrapper">
-        <h1>Markdown Editor</h1>
+        <div class="container">
+            <h1>Markdown Editor</h1>
+
+            <h2>Headings</h2>
+
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                <tr>
+                    <th>Markdown</th>
+                    <th>HTML</th>
+                    <th>Rendered Output</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><code># Heading level 1</code></td>
+                    <td><code>&lt;h1&gt;Heading level 1&lt;/h1&gt;</code></td>
+                    <td><h1>Heading level 1</h1></td>
+                </tr>
+                <tr>
+                    <td><code>## Heading level 2</code></td>
+                    <td><code>&lt;h2&gt;Heading level 2&lt;/h2&gt;</code></td>
+                    <td><h2>Heading level 2</h2></td>
+                </tr>
+                <tr>
+                    <td><code>### Heading level 3</code></td>
+                    <td><code>&lt;h3&gt;Heading level 3&lt;/h3&gt;</code></td>
+                    <td><h3>Heading level 3</h3></td>
+                </tr>
+                <tr>
+                    <td><code>#### Heading level 4</code></td>
+                    <td><code>&lt;h4&gt;Heading level  4&lt;/h4&gt;</code></td>
+                    <td><h4 class="no-anchor">Heading level 4</h4></td>
+                </tr>
+                <tr>
+                    <td><code>##### Heading level 5</code></td>
+                    <td><code>&lt;h5&gt;Heading level 5&lt;/h5&gt;</code></td>
+                    <td><h5 class="no-anchor">Heading level 5</h5></td>
+                </tr>
+                <tr>
+                    <td><code>###### Heading level 6</code></td>
+                    <td><code>&lt;h6&gt;Heading level 6&lt;/h6&gt;</code></td>
+                    <td><h6 class="no-anchor">Heading level 6</h6></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
